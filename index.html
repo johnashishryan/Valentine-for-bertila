@@ -8,70 +8,42 @@
         body {
             height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; align-items: center;
             background-color: #ffebee;
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            overflow: hidden;
+            margin: 0; overflow: hidden;
             touch-action: manipulation;
         }
         .container {
-            text-align: center;
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
+            text-align: center; background: white;
+            padding: 30px; border-radius: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 85%;
-            max-width: 400px;
+            width: 85%; max-width: 400px;
+            position: relative; /* Keeps button inside card initially */
         }
-        h1 {
-            color: #d81b60;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            line-height: 1.4;
-        }
+        h1 { color: #d81b60; font-size: 1.8rem; margin-bottom: 25px; }
         .buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            height: 100px;
-            position: relative;
+            display: flex; justify-content: center;
+            align-items: center; gap: 20px;
+            height: 80px; position: relative;
         }
         button {
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
+            padding: 12px 25px; font-size: 1.1rem;
+            border: none; border-radius: 50px;
+            cursor: pointer; font-weight: bold;
         }
-        #yes {
-            background-color: #ff4081;
-            color: white;
-            z-index: 1;
+        #yes { background-color: #ff4081; color: white; }
+        #no { 
+            background-color: #f5f5f5; color: #9e9e9e; 
+            position: absolute; left: 160px; /* Fixed position so it shows up */
         }
-        #no {
-            background-color: #f5f5f5;
-            color: #9e9e9e;
-            position: absolute;
-            transition: 0.1s;
-        }
-        #success-message {
-            display: none;
-        }
-        img {
-            width: 180px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-        }
+        #success-message { display: none; }
+        img { width: 180px; border-radius: 15px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
-
     <div class="container" id="main-card">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXh6ZzVsa2Z3Ym9qZzR4cXN6OHJ6eXh6ZzVsa2Z3Ym9qZzR4JnB0X2luc2lkZT10cnVlJmNjPTE/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Cute cat">
+        <img src="https://media.tenor.com/978G6Y1Y690AAAAi/peach-goma.gif" alt="Cute Cat">
         <h1>Bertila Angelin, will you be my Valentine?</h1>
         <div class="buttons">
             <button id="yes">Yes</button>
@@ -80,7 +52,7 @@
     </div>
 
     <div class="container" id="success-message">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXh6ZzVsa2Z3Ym9qZzR4cXN6OHJ6eXh6ZzVsa2Z3Ym9qZzR4JnB0X2luc2lkZT10cnVlJmNjPTE/c793KRYmi866E/giphy.gif" alt="Happy dance">
+        <img src="https://media.tenor.com/X55AasV_I78AAAAi/milk-and-mocha.gif" alt="Happy Dance">
         <h1>Yay! ❤️ See you soon!</h1>
     </div>
 
@@ -91,18 +63,16 @@
         const successMessage = document.getElementById("success-message");
 
         const moveButton = () => {
-            // Limits so the button stays roughly on the screen
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
-            
             noButton.style.left = `${x}px`;
             noButton.style.top = `${y}px`;
+            noButton.style.position = 'fixed'; // Switch to fixed once it starts moving
         };
 
-        // Runs away on hover (laptop) or touch (mobile)
         noButton.addEventListener("mouseover", moveButton);
         noButton.addEventListener("touchstart", (e) => {
-            e.preventDefault(); // Stops the actual click from happening
+            e.preventDefault();
             moveButton();
         });
 
